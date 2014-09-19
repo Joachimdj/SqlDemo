@@ -44,6 +44,16 @@ public class JdbcDemo {
             }
         }
     }
+      public void insertPerson() throws SQLException {
+        try (Statement stmt = getConnection().createStatement()) {
+            stmt.executeQuery("insert into Person values(100,'Peter','Hansen','22332211')");
+            stmt.executeQuery("insert into Person  values(110,'Lone','Hansen','22643211')"); 
+            stmt.executeQuery("insert into Person  values(120,'John','McDonald','22223211')"); 
+            stmt.executeQuery("insert into Person  values(120,'John','McDonald','22222111')"); 
+        } catch (SQLException ex) {
+            Logger.getLogger(JdbcDemo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     public void insertCol() throws SQLException {
         try {
@@ -78,8 +88,8 @@ public class JdbcDemo {
         JdbcDemo test = new JdbcDemo();
         try {
             test.insertCol();
-            test.personQuery();
-
+            test.personQuery(); 
+            test.insertPerson();
         } catch (SQLException ex) {
             Logger.getLogger(JdbcDemo.class.getName()).log(Level.SEVERE, null, ex);
         }
