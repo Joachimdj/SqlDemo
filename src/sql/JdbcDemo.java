@@ -6,9 +6,12 @@ import java.sql.Statement;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import sql.DB;
 
 public class JdbcDemo {
 
+    Statement statement = null;
+    Connection connection = null;
     public static final String userName = "cphmp259";
     public static final String pw = "cphmp259";
     public static final String dbms = "oracle";
@@ -42,10 +45,41 @@ public class JdbcDemo {
         }
     }
 
+    public void insertCol() throws SQLException {
+        try {
+            Class.forName(DB.driver);
+
+            connection = DriverManager.getConnection(DB.URL, DB.ID, DB.PW);
+
+            statement = connection.createStatement();
+
+            String insertSQL = "ALTER TABLE Person ADD mobile char(8)";
+            //=== Execute the statement and retrieve 
+            //	a count of how many rows was inserted
+            
+            int rows = statement.executeUpdate(insertSQL);
+
+            //=== Validate the result
+            if (rows == 1) {
+                System.out.println("One row inserted!");
+            } else {
+                System.out.println("No row inserted (fail)");
+            }
+        } catch (Exception ee) {
+            System.out.println("fail");
+            System.err.println(ee);
+        } finally {
+            statement.close();
+            connection.close();
+        }
+    }
+
     public static void main(String[] args) {
         JdbcDemo test = new JdbcDemo();
         try {
+            test.insertCol();
             test.personQuery();
+
         } catch (SQLException ex) {
             Logger.getLogger(JdbcDemo.class.getName()).log(Level.SEVERE, null, ex);
         }
