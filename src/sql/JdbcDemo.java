@@ -9,8 +9,8 @@ import java.util.logging.Logger;
 
 public class JdbcDemo {
 
-    public static final String userName = "xxx";
-    public static final String pw = "yyy";
+    public static final String userName = "cphmp259";
+    public static final String pw = "cphmp259";
     public static final String dbms = "oracle";
     static final String driverDerby = "org.apache.derby.jdbc.EmbeddedDriver";
     static final String driverOracle = "oracle.jdbc.driver.OracleDriver";
